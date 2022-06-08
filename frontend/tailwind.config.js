@@ -12,7 +12,7 @@ module.exports = {
     },
     fontFamily: {
       primary: ['Inter', 'Arial', 'sans-serif'],
-      secondary: ['Roboto', 'Times New Roman', 'Times', 'serif'],
+      secondary: ['Open Sans', 'Poppins', 'serif'],
     },
     extend: {},
   },
