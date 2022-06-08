@@ -9,7 +9,7 @@ describe('HomeScreen', () => {
 
   it('should be find title', () => {
     makeSut()
-    const text = screen.getByText(/The World’s Best Crypto House/i)
+    const text = screen.getByText(/Crypto/i)
     expect(text).toBeInTheDocument()
   })
 })
