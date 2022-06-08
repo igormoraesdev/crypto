@@ -7,7 +7,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Crypto</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeScreen />
     </>
