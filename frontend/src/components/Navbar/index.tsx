@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const Navbar = () => {
   return (
-    <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-4 border-b-2 border-indigo-600">
+    <div className="fixed bg-white min-w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 border-b-2 border-indigo-600">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <a href="#" className="flex items-center">
           <Image
@@ -12,7 +12,7 @@ const Navbar = () => {
             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
             alt=""
           />
-          <span className="ml-4 font-bold text-2xl text-indigo-600">
+          <span className="ml-4 font-bold sm:text-2xl text-base text-indigo-600">
             Crypto
           </span>
         </a>
