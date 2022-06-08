@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 const Navbar = () => {
   return (
@@ -35,7 +35,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
