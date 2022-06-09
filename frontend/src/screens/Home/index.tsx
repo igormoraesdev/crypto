@@ -1,4 +1,11 @@
+import { useRouter } from 'next/router'
+
 const HomeScreen = () => {
+  const router = useRouter()
+
+  const handleMovePage = () => {
+    router.push('/login')
+  }
   return (
     <div className="h-screen relative">
       <video autoPlay muted loop className="h-full w-full object-cover">
@@ -17,7 +24,10 @@ const HomeScreen = () => {
             {" is the world's first and largest NFT marketplace"}
           </p>
           <div>
-            <button className="font-secondary text-base mt-16 py-4 px-8 bg-white text-indigo-600 rounded-md font-bold hover:bg-indigo-900 hover:text-white hover:-translate-y-1 ease-in duration-300">
+            <button
+              onClick={handleMovePage}
+              className="font-secondary text-base mt-16 py-4 px-8 bg-white text-indigo-600 rounded-md font-bold hover:bg-indigo-900 hover:text-white hover:-translate-y-1 ease-in duration-300"
+            >
               Join us now
             </button>
           </div>
