@@ -25,10 +25,28 @@ const RegisterScreen = () => {
                 required
               />
               <TextInput
+                label="Confirm address"
+                placeholder="Confirm address"
+                id="email-address"
+                name="confirmEmail"
+                type="email"
+                autocomplete="email"
+                required
+              />
+              <TextInput
                 label="Password"
                 placeholder="Password"
                 id="email-address"
                 name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+              />
+              <TextInput
+                label="Confirm Password"
+                placeholder="Confirm Password"
+                id="email-address"
+                name="confirmPassword"
                 type="password"
                 autocomplete="current-password"
                 required
