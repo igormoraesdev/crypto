@@ -5,6 +5,7 @@ import { Navbar } from '../../components'
 jest.mock('next/router', () => ({
   useRouter: () => ({
     pathname: '',
+    push: jest.fn(),
   }),
 }))
 
@@ -14,17 +15,19 @@ describe('Navbar', () => {
     makeSut()
   })
 
-  it('should be click on signin', () => {
+  it('should be click on signin', async () => {
     makeSut()
     const button = screen.getByText(/Sign in/i)
     userEvent.click(button)
-    expect(button).toHaveAttribute('href', '/login')
+
+    expect(button).toHaveProperty('href', 'http://localhost/login')
   })
 
-  it('should be click on sign up', () => {
+  it('should be click on sign up', async () => {
     makeSut()
     const button = screen.getByText(/Sign up/i)
     userEvent.click(button)
-    expect(button).toHaveAttribute('href', '/register')
+
+    expect(button).toHaveProperty('href', 'http://localhost/register')
   })
 })
