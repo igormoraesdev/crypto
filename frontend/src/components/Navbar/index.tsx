@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { destroyCookie } from 'nookies'
 import { useRouter } from 'next/router'
 import { useStore } from '../../store/store'
 import Typography from '../Typography'
@@ -10,6 +11,11 @@ const Navbar = () => {
   const isRegisterPath = router.pathname.includes('register')
   const isLoginPath = router.pathname.includes('login')
   const isDashboardPath = router.pathname.includes('dashboard')
+
+  const handleLogout = () => {
+    destroyCookie(null, 'auth')
+    router.push('/')
+  }
 
   return (
     <div className="z-50 fixed bg-white min-w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 border-b-2 border-indigo-600">
@@ -43,11 +49,12 @@ const Navbar = () => {
                   Admin
                 </a>
               </Link>
-              <Link passHref href="/admin/register">
-                <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-900 hover:-translate-y-1 ease-in duration-300">
-                  Register
-                </a>
-              </Link>
+              <button
+                onClick={handleLogout}
+                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-900 hover:-translate-y-1 ease-in duration-300"
+              >
+                Logout
+              </button>
             </div>
           </div>
         )}

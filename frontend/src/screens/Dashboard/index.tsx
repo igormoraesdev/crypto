@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { Typography, Loading } from '../../components'
 import { Crypto, User } from '../../data/model'
 import { CryptoFormat } from '../../helpers'
@@ -90,7 +91,12 @@ const DashboardScreen = ({ user }: Props) => {
     )
 
   return (
-    <div className="h-screen bg-white">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className=" h-screen bg-white"
+    >
       <div className="w-full h-full py-48 container mx-auto flex flex-col items-center justify-start">
         <div className="flex flex-col items-center justify-center h-64 rounded bg-white shadow-2xl shadow-indigo-600 py-4 px-4">
           <div className="flex flex-col w-full">
@@ -160,7 +166,7 @@ const DashboardScreen = ({ user }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
