@@ -78,81 +78,82 @@ const DashboardScreen = () => {
     handleSocket()
   }, [])
 
+  if (!crypto)
+    return (
+      <div className="py-80 flex items-center justify-center h-64">
+        <Loading />
+      </div>
+    )
+
   return (
     <div className="h-screen bg-white">
       <div className="w-full h-full py-48 container mx-auto flex flex-col items-center justify-start">
-        <div className="flex flex-col items-center justify-center h-64 w-80 rounded bg-white shadow-2xl shadow-indigo-600 py-4 px-4">
-          {!crypto ? (
-            <div className="flex items-center justify-center">
-              <Loading />
-            </div>
-          ) : (
-            <div className="flex flex-col w-full">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="rounded"
-                  width={40}
-                  height={40}
-                  src="	https://www.cryptomkt.com/static/global/assets/images/bitcoin-logo-solo.png"
-                  alt="logo bitcoin"
-                />
-                <Typography
-                  as="p"
-                  className="font-secondary text-slate-900 font-bold"
-                >
-                  {`Price ${crypto?.assetCode}`}
-                </Typography>
-              </div>
+        <div className="flex flex-col items-center justify-center h-64 rounded bg-white shadow-2xl shadow-indigo-600 py-4 px-4">
+          <div className="flex flex-col w-full">
+            <div className="flex justify-between items-center">
+              <Image
+                className="rounded"
+                width={40}
+                height={40}
+                src="	https://www.cryptomkt.com/static/global/assets/images/bitcoin-logo-solo.png"
+                alt="logo bitcoin"
+              />
               <Typography
                 as="p"
-                className="font-secondary text-green-600 font-bold mt-6 text-3xl"
+                className="font-secondary text-slate-900 font-bold"
               >
-                {`$ ${crypto?.ask}`}
+                {`Price ${crypto?.assetCode}`}
               </Typography>
-              <div className="mt-4 flex items-center">
-                <Typography
-                  as="p"
-                  className="font-secondary text-slate-900 font-bold"
-                >
-                  BID:
-                </Typography>
-                <Typography
-                  as="p"
-                  className="ml-4 font-secondary text-slate-900 font-bold"
-                >
-                  {crypto?.bid}
-                </Typography>
-              </div>
-              <div className="mt-4 flex items-center">
-                <Typography
-                  as="p"
-                  className="font-secondary text-slate-900 font-bold"
-                >
-                  CLOSE:
-                </Typography>
-                <Typography
-                  as="p"
-                  className="ml-4 font-secondary text-slate-900 font-bold"
-                >
-                  {crypto?.close}
-                </Typography>
-              </div>
-              <div className="mt-4 flex items-center">
-                <Typography
-                  as="p"
-                  className="font-secondary text-slate-900 font-bold"
-                >
-                  LAST 24h
-                </Typography>
-                <Typography
-                  as="p"
-                  className="ml-4 font-secondary text-slate-900 font-bold"
-                >
-                  {crypto?.lowLast24}
-                </Typography>
-              </div>
             </div>
-          )}
+            <Typography
+              as="p"
+              className="font-secondary text-green-600 font-bold mt-6 text-3xl"
+            >
+              {`$ ${crypto?.ask}`}
+            </Typography>
+            <div className="mt-4 flex items-center">
+              <Typography
+                as="p"
+                className="font-secondary text-slate-900 font-bold"
+              >
+                BID:
+              </Typography>
+              <Typography
+                as="p"
+                className="ml-4 font-secondary text-slate-900 font-bold"
+              >
+                {`$ ${crypto?.bid}`}
+              </Typography>
+            </div>
+            <div className="mt-4 flex items-center">
+              <Typography
+                as="p"
+                className="font-secondary text-slate-900 font-bold"
+              >
+                CLOSE:
+              </Typography>
+              <Typography
+                as="p"
+                className="ml-4 font-secondary text-slate-900 font-bold"
+              >
+                {`$ ${crypto?.close}`}
+              </Typography>
+            </div>
+            <div className="mt-4 flex items-center">
+              <Typography
+                as="p"
+                className="font-secondary text-slate-900 font-bold"
+              >
+                LAST 24h
+              </Typography>
+              <Typography
+                as="p"
+                className="ml-4 font-secondary text-slate-900 font-bold"
+              >
+                {`$ ${crypto?.lowLast24}`}
+              </Typography>
+            </div>
+          </div>
         </div>
       </div>
     </div>
