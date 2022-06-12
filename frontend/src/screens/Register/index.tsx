@@ -13,7 +13,7 @@ interface RegisterData {
 
 const RegisterScreen = () => {
   const router = useRouter()
-  const { setUser } = useStore((state) => state)
+  const { setUser, listUsers } = useStore((state) => state)
   const {
     handleSubmit,
     control,
@@ -31,13 +31,19 @@ const RegisterScreen = () => {
         user: {
           ...payload,
           role: 'user',
+          spread: 1,
         },
         token: uuidv4(),
       }
       setUser(dataStore?.user)
       router.push('/dashboard')
+
+      const newListUsers = [...listUsers, dataStore.user]
+
+      localStorage.setItem('usersList', JSON.stringify(newListUsers))
+
       setCookie(null, 'auth', JSON.stringify(dataStore), {
-        maxAge: 60,
+        maxAge: 10,
       })
     } catch (error) {
       console.log(error)

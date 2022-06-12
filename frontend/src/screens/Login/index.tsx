@@ -6,6 +6,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import { TextInput, Typography } from '../../components'
 import { httpClient } from '../../lib/http-client/http-client-api'
 import { useStore } from '../../store/store'
+import { User } from '../../data/model'
 
 interface LoginData {
   email: string
@@ -24,10 +25,12 @@ const LoginScreen = () => {
 
   const handleSubmitLogin = async (data: LoginData) => {
     try {
-      if (
-        data.email.includes('admin@example.com') ||
-        data.email.includes('user@example.com')
-      ) {
+      const usersList = localStorage.getItem('usersList')
+      const formatedList = JSON.parse(usersList as string)
+      const hasEmail = formatedList.find(
+        (item: User) => item.email === data.email
+      )
+      if (data.email.includes('admin@example.com')) {
         const response = await httpClient.get(`/login?email=${data.email}`)
         const dataStore = {
           user: {
@@ -36,6 +39,19 @@ const LoginScreen = () => {
           token: uuidv4(),
         }
         setUser(response.data)
+        router.push('/dashboard')
+        setCookie(null, 'auth', JSON.stringify(dataStore), {
+          maxAge: 60,
+        })
+      } else if (hasEmail) {
+        await httpClient.get(`/login?email=${data.email}`)
+        const dataStore = {
+          user: {
+            ...hasEmail,
+          },
+          token: uuidv4(),
+        }
+        setUser(hasEmail)
         router.push('/dashboard')
         setCookie(null, 'auth', JSON.stringify(dataStore), {
           maxAge: 60,
