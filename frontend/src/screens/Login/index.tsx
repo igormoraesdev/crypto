@@ -1,8 +1,33 @@
 import { useRouter } from 'next/router'
+import { useForm, Controller } from 'react-hook-form'
+import { ErrorMessage } from '@hookform/error-message'
 import { TextInput, Typography } from '../../components'
+import { httpClientApi } from '../../lib/http-client/http-client-api'
+
+interface LoginData {
+  email: string
+  password: string
+}
 
 const LoginScreen = () => {
   const router = useRouter()
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<LoginData>()
+
+  const handleSubmitLogin = async () => {
+    try {
+      const response = await httpClientApi.httpClient.get(
+        '/login?email=admin@example.com'
+      )
+      console.log(response)
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <div className="h-screen bg-white">
       <div className="w-full h-full container mx-auto flex flex-col justify-start items-center">
@@ -16,28 +41,65 @@ const LoginScreen = () => {
                 Login
               </Typography>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
-              <TextInput
-                label="Email address"
-                placeholder="Email address"
-                id="email-address"
+            <form
+              className="mt-8 space-y-6"
+              onSubmit={handleSubmit(handleSubmitLogin)}
+            >
+              <Controller
+                control={control}
                 name="email"
-                type="email"
-                autocomplete="email"
-                required
+                rules={{
+                  required: 'Email is required',
+                  pattern: {
+                    message: 'Email format wrong',
+                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    onChange={field.onChange}
+                    label="Email address"
+                    placeholder="Email address"
+                    id="email-address"
+                    name={field.name}
+                    value={field.value}
+                    type="email"
+                    autocomplete="email"
+                  />
+                )}
               />
-              <TextInput
-                label="Password"
-                placeholder="Password"
-                id="email-address"
+              <ErrorMessage
+                className="text-red-600"
+                errors={errors}
+                name="email"
+                as="span"
+              />
+              <Controller
+                control={control}
                 name="password"
-                type="password"
-                autocomplete="current-password"
-                required
+                rules={{
+                  required: 'Password is required',
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    onChange={field.onChange}
+                    label="Password"
+                    placeholder="Password"
+                    id="password"
+                    name={field.name}
+                    type="password"
+                    autocomplete="current-password"
+                  />
+                )}
+              />
+              <ErrorMessage
+                className="text-red-600"
+                errors={errors}
+                name="password"
+                as="span"
               />
               <button
-                onClick={() => router.push('/dashboard')}
-                type="button"
+                type="submit"
                 className="group relative text-base w-full flex justify-center py-4 px-4 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Send
