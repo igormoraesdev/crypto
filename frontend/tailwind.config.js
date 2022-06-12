@@ -14,7 +14,12 @@ module.exports = {
       primary: ['Inter', 'Arial', 'sans-serif'],
       secondary: ['Open Sans', 'Poppins', 'serif'],
     },
-    extend: {},
+    extend: {
+      animation: {
+        bounce200: 'bounce 1s infinite 200ms',
+        bounce400: 'bounce 1s infinite 400ms',
+      },
+    },
   },
   plugins: ['tailwindcss', 'autoprefixer', 'postcss'],
 }
