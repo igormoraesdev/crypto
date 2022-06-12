@@ -1,12 +1,16 @@
+import { setCookie } from 'nookies'
+import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import { TextInput, Typography } from '../../components'
 import { httpClientApi } from '../../lib/http-client/http-client-api'
+import { useStore } from '../../store/store'
 
 interface LoginData {
   email: string
   password: string
+  credentials?: string
 }
 
 const LoginScreen = () => {
@@ -17,14 +21,33 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm<LoginData>()
 
-  const handleSubmitLogin = async () => {
+  const setUser = useStore((state) => state.setUser)
+
+  const handleSubmitLogin = async (data: LoginData) => {
     try {
-      const response = await httpClientApi.httpClient.get(
-        '/login?email=admin@example.com'
-      )
-      console.log(response)
+      if (
+        data.email.includes('admin@example.com') ||
+        data.email.includes('user@example.com')
+      ) {
+        const response = await httpClientApi.httpClient.get(
+          `/login?email=${data.email}`
+        )
+        const dataStore = {
+          user: {
+            ...response.data,
+          },
+          token: uuidv4(),
+        }
+        setUser(response.data)
+        router.push('/dashboard')
+        setCookie(null, 'auth', JSON.stringify(dataStore), {
+          maxAge: 60,
+        })
+      } else {
+        throw new Error()
+      }
     } catch (error) {
-      alert(error)
+      alert('Credentials not found')
     }
   }
 

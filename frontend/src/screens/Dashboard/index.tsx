@@ -1,12 +1,16 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Typography, Loading } from '../../components'
-import { Crypto } from '../../data/model'
+import { Crypto, User } from '../../data/model'
 import { CryptoFormat } from '../../helpers'
 
-const DashboardScreen = () => {
+type Props = {
+  user: User
+}
+
+const DashboardScreen = ({ user }: Props) => {
   const [crypto, setCrypto] = useState<Crypto | null>()
-  const SPREAD = 1
+  const SPREAD = user?.spread ?? 1
 
   const handleSocket = () => {
     const socket = new WebSocket(process.env.WEBSOCKET_URL as string)

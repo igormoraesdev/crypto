@@ -1,16 +1,42 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps } from 'next'
+import nookies from 'nookies'
 import Head from 'next/head'
 import { DashboardScreen } from '../../screens'
+import { User } from '../../data/model'
 
-const Dashboard: NextPage = () => {
+type Props = {
+  user: User
+}
+
+const Dashboard = ({ user }: Props) => {
   return (
     <>
       <Head>
         <title>Dashboard Crypto</title>
       </Head>
-      <DashboardScreen />
+      <DashboardScreen user={user} />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies: any = nookies.get(context)
+  const hasCookies = cookies['auth']
+
+  if (!hasCookies) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+      props: {},
+    }
+  }
+  const data = JSON.parse(hasCookies)
+  return {
+    props: {
+      user: data.user,
+    },
+  }
 }
 
 export default Dashboard
