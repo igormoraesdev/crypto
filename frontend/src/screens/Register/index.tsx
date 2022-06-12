@@ -1,6 +1,49 @@
+import { useForm, Controller } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
+import { setCookie } from 'nookies'
+import { ErrorMessage } from '@hookform/error-message'
 import { TextInput, Typography } from '../../components'
+import { httpClient } from '../../lib/http-client/http-client-api'
+import { useStore } from '../../store/store'
+import { useRouter } from 'next/router'
+interface RegisterData {
+  email: string
+  password: string
+}
 
 const RegisterScreen = () => {
+  const router = useRouter()
+  const { setUser } = useStore((state) => state)
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<RegisterData>()
+
+  const handleRegister = async (data: RegisterData) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    }
+    try {
+      await httpClient.post('/register', payload)
+      const dataStore = {
+        user: {
+          ...payload,
+          role: 'user',
+        },
+        token: uuidv4(),
+      }
+      setUser(dataStore?.user)
+      router.push('/dashboard')
+      setCookie(null, 'auth', JSON.stringify(dataStore), {
+        maxAge: 60,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="h-screen bg-white">
       <div className="w-full h-full container mx-auto flex flex-col justify-start items-center">
@@ -14,42 +57,62 @@ const RegisterScreen = () => {
                 Sign up
               </Typography>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
-              <TextInput
-                label="Email address"
-                placeholder="Email address"
-                id="email-address"
+            <form
+              onSubmit={handleSubmit(handleRegister)}
+              className="mt-8 space-y-6"
+            >
+              <Controller
+                control={control}
                 name="email"
-                type="email"
-                autocomplete="email"
-                required
+                rules={{
+                  required: 'Email is required',
+                  pattern: {
+                    message: 'Email format wrong',
+                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    onChange={field.onChange}
+                    label="Email address"
+                    placeholder="Email address"
+                    id="email-address"
+                    name={field.name}
+                    value={field.value}
+                    type="email"
+                    autocomplete="email"
+                  />
+                )}
               />
-              <TextInput
-                label="Confirm address"
-                placeholder="Confirm address"
-                id="email-address"
-                name="confirmEmail"
-                type="email"
-                autocomplete="email"
-                required
+              <ErrorMessage
+                className="text-red-600"
+                errors={errors}
+                name="email"
+                as="span"
               />
-              <TextInput
-                label="Password"
-                placeholder="Password"
-                id="email-address"
+              <Controller
+                control={control}
                 name="password"
-                type="password"
-                autocomplete="current-password"
-                required
+                rules={{
+                  required: 'Password is required',
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    onChange={field.onChange}
+                    label="Password"
+                    placeholder="Password"
+                    id="password"
+                    name={field.name}
+                    type="password"
+                    autocomplete="current-password"
+                  />
+                )}
               />
-              <TextInput
-                label="Confirm Password"
-                placeholder="Confirm Password"
-                id="email-address"
-                name="confirmPassword"
-                type="password"
-                autocomplete="current-password"
-                required
+              <ErrorMessage
+                className="text-red-600"
+                errors={errors}
+                name="password"
+                as="span"
               />
               <button
                 type="submit"

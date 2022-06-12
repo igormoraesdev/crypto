@@ -4,13 +4,12 @@ import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import { TextInput, Typography } from '../../components'
-import { httpClientApi } from '../../lib/http-client/http-client-api'
+import { httpClient } from '../../lib/http-client/http-client-api'
 import { useStore } from '../../store/store'
 
 interface LoginData {
   email: string
   password: string
-  credentials?: string
 }
 
 const LoginScreen = () => {
@@ -29,9 +28,7 @@ const LoginScreen = () => {
         data.email.includes('admin@example.com') ||
         data.email.includes('user@example.com')
       ) {
-        const response = await httpClientApi.httpClient.get(
-          `/login?email=${data.email}`
-        )
+        const response = await httpClient.get(`/login?email=${data.email}`)
         const dataStore = {
           user: {
             ...response.data,

@@ -1,5 +1,6 @@
 import { HttpClient } from './http-client'
 
-export const httpClientApi = new HttpClient(
-  'https://075008f2-2bc9-4567-95e7-3420ce91a9ec.mock.pstmn.io'
-)
+const httpClientApi = new HttpClient(process.env.CLIENT_URL as string)
+
+const httpClient = httpClientApi.httpClient
+export { httpClient }
