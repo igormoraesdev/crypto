@@ -6,7 +6,7 @@ const Login: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Crypto</title>
+        <title>Login Crypto</title>
       </Head>
       <LoginScreen />
     </>

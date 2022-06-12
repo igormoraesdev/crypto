@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router'
 import { TextInput, Typography } from '../../components'
 
 const LoginScreen = () => {
+  const router = useRouter()
   return (
     <div className="h-screen bg-white">
       <div className="w-full h-full container mx-auto flex flex-col justify-start items-center">
@@ -34,7 +36,8 @@ const LoginScreen = () => {
                 required
               />
               <button
-                type="submit"
+                onClick={() => router.push('/dashboard')}
+                type="button"
                 className="group relative text-base w-full flex justify-center py-4 px-4 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Send
