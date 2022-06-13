@@ -44,7 +44,7 @@ const RegisterScreen = () => {
       localStorage.setItem('usersList', JSON.stringify(newListUsers))
 
       setCookie(null, 'auth', JSON.stringify(dataStore), {
-        maxAge: 10,
+        maxAge: 60 * 60,
       })
     } catch (error) {
       alert('Error, please check if server running')

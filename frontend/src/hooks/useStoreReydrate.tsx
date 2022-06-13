@@ -13,8 +13,7 @@ const useStoreReydrate = () => {
 
     if (storeUsers) {
       const parserList = JSON.parse(storeUsers)
-      const newLists = [...parserList]
-      setListUser(newLists)
+      setListUser(parserList)
     } else {
       setListUser([])
     }

@@ -3,12 +3,14 @@ import nookies from 'nookies'
 import Head from 'next/head'
 import { DashboardScreen } from '../../screens'
 import { User } from '../../data/model'
+import useStoreReydrate from '../../hooks/useStoreReydrate'
 
 type Props = {
   user: User
 }
 
 const Dashboard = ({ user }: Props) => {
+  useStoreReydrate()
   return (
     <>
       <Head>

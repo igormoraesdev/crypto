@@ -42,7 +42,7 @@ const LoginScreen = () => {
         }
         setUser(response.data)
         setCookie(null, 'auth', JSON.stringify(dataStore), {
-          maxAge: 60,
+          maxAge: 60 * 60,
         })
         router.push('/dashboard')
       } else if (hasEmail) {
@@ -57,7 +57,7 @@ const LoginScreen = () => {
         setUser(hasEmail)
         router.push('/dashboard')
         setCookie(null, 'auth', JSON.stringify(dataStore), {
-          maxAge: 60,
+          maxAge: 60 * 60,
         })
       } else {
         throw new Error()
@@ -71,7 +71,7 @@ const LoginScreen = () => {
     <div className="h-screen bg-white">
       <div className="w-full h-full container mx-auto flex flex-col justify-start items-center">
         <div className="w-full min-h-full flex py-48 justify-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-80 space-y-8">
+          <div className="max-w-md w-full space-y-8">
             <div>
               <Typography
                 as="h2"

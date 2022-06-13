@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { TextInput } from '../../components'
 import { User } from '../../data/model'
@@ -66,6 +67,10 @@ const AdminScreen = () => {
       alert('Error, try update again')
     }
   }
+
+  useEffect(() => {
+    setValue('users', listUsers)
+  }, [listUsers])
 
   if (listUsers.length <= 0)
     return (
