@@ -1,6 +1,10 @@
 # Crypto
 
-# Tech
+## Description
+
+A Crypto platform built with NextJS and Postman Mock Server and LocalStorage to simulate a Database.
+
+## Techs
 
 - NextJS
 - Zustand
@@ -8,10 +12,6 @@
 - React-Hook-Form
 - Testing Library
 - Jest
-
-## Description
-
-A Crypto platform built with NextJS and Postman Mock Server and LocalStorage to simulate a Database.
 
 ### Requirements
 
