@@ -26,7 +26,7 @@ const Navbar = () => {
           <div className="flex items-center justify-end md:flex-1">
             <div className="flex items-center">
               <p className="hidden sm:block whitespace-nowrap text-base font-medium mr-4">
-                Wecolme{' '}
+                Welcome{' '}
               </p>
               <span className="hidden sm:block whitespace-nowrap text-base font-medium text-indigo-600 mr-4">
                 {user?.email}
