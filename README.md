@@ -1,5 +1,12 @@
 # Crypto
 
+# Tech
+
+- NextJS
+- Zustand
+- TailwindCss
+- React-Hook-Form
+
 ## Description
 
 A Crypto platform built with NextJS and Postman Mock Server and LocalStorage to simulate a Database.
