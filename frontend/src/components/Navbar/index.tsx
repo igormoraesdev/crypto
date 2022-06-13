@@ -24,9 +24,14 @@ const Navbar = () => {
       <>
         {isAdmin && user?.role === 'admin' && (
           <div className="flex items-center justify-end md:flex-1">
-            <p className="hidden sm:block whitespace-nowrap text-base font-medium text-indigo-600 mr-4">
-              Wecolme {user?.email}
-            </p>
+            <div className="flex items-center">
+              <p className="hidden sm:block whitespace-nowrap text-base font-medium mr-4">
+                Wecolme{' '}
+              </p>
+              <span className="hidden sm:block whitespace-nowrap text-base font-medium text-indigo-600 mr-4">
+                {user?.email}
+              </span>
+            </div>
             {isAdminPath ? (
               <Link passHref href="/dashboard">
                 <a className="whitespace-nowrap text-base font-medium text-gray-500 border-2 px-4 py-2 border-indigo-600 rounded hover:text-indigo-600 ease-in duration-300">
