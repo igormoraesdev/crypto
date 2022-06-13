@@ -8,6 +8,10 @@ jest.mock('next/router', () => ({
   }),
 }))
 
+jest.mock('uuid', () => ({
+  v4: jest.fn(),
+}))
+
 describe('HomeScreen', () => {
   const makeSut = () => render(<HomeScreen />)
   it('should be render', () => {
