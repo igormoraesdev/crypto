@@ -85,19 +85,19 @@ const DashboardScreen = ({ user }: Props) => {
 
   if (!crypto)
     return (
-      <div className="py-80 flex items-center justify-center h-64">
+      <div className="h-screen bg-white flex items-center justify-center">
         <Loading />
       </div>
     )
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className=" h-screen bg-white"
+      className="h-screen bg-white flex items-center justify-center"
     >
-      <div className="w-full h-full py-48 container mx-auto flex flex-col items-center justify-start">
+      <div className="w-full h-full container mx-auto flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center h-64 rounded bg-white shadow-2xl shadow-indigo-600 py-4 px-4">
           <div className="flex flex-col w-full">
             <div className="flex justify-between items-center">
