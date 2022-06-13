@@ -2,23 +2,21 @@ import { parseCookies } from 'nookies'
 import { useEffect } from 'react'
 import { useStore } from '../store/store'
 
-type Props = {
-  children: any
-}
-
-const StoreGate = ({ children }: Props) => {
-  const { setUser, setListUser, listUsers } = useStore((state) => state)
+const useStoreReydrate = () => {
+  const { setUser, setListUser } = useStore((state) => state)
 
   useEffect(() => {
+    console.log('StoreGate initialized')
     const cookies = parseCookies()
     const data = cookies['auth']
     const storeUsers = localStorage.getItem('usersList')
 
     if (storeUsers) {
       const parserList = JSON.parse(storeUsers)
-      const newLists = [...listUsers, ...parserList]
-
+      const newLists = [...parserList]
       setListUser(newLists)
+    } else {
+      setListUser([])
     }
 
     if (data) {
@@ -26,8 +24,7 @@ const StoreGate = ({ children }: Props) => {
       setUser(dataParsed.user)
     }
   }, [])
-  console.log('store usersList', listUsers)
-  return children
+  return {}
 }
 
-export default StoreGate
+export default useStoreReydrate
