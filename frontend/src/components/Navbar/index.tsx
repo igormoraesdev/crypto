@@ -11,6 +11,7 @@ const Navbar = () => {
   const isRegisterPath = router.pathname.includes('register')
   const isLoginPath = router.pathname.includes('login')
   const isDashboardPath = router.pathname.includes('dashboard')
+  const isAdminPath = router.pathname.includes('admin')
 
   const handleLogout = () => {
     destroyCookie(null, 'auth')
@@ -75,14 +76,14 @@ const Navbar = () => {
         ) : (
           <div className="">
             <div className="flex items-center justify-end md:flex-1 lg:w-0">
-              {!isLoginPath && !isDashboardPath && (
+              {!isLoginPath && !isDashboardPath && !isAdminPath && (
                 <Link passHref href="/login">
                   <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-900 hover:-translate-y-1 ease-in duration-300">
                     Sign in
                   </a>
                 </Link>
               )}
-              {!isRegisterPath && !isDashboardPath && (
+              {!isRegisterPath && !isDashboardPath && !isAdminPath && (
                 <Link passHref href="/register">
                   <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-900 hover:-translate-y-1 ease-in duration-300">
                     Sign up

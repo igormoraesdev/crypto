@@ -2,11 +2,12 @@ type Props = {
   label: string
   name: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  value?: string
 }
 
 type InputProps = HTMLInputElement | Props
 
-const TextInput = ({ label, name, onChange }: Props & InputProps) => {
+const TextInput = ({ label, name, onChange, value }: Props & InputProps) => {
   return (
     <div className="rounded -space-y-px">
       <div>
@@ -18,7 +19,8 @@ const TextInput = ({ label, name, onChange }: Props & InputProps) => {
           onChange={onChange}
           id={name}
           name={name}
-          className="appearance-none rounded relative block w-full px-3 py-3 border-2 font-primary border-gray-300 placeholder-gray-600 text-coolGray-900 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 focus:z-10 sm:text-md text-md"
+          value={value}
+          className="appearance-none rounded relative block min-w-full px-3 py-3 border-2 font-primary border-gray-300 placeholder-gray-600 text-coolGray-900 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 focus:z-10 sm:text-md text-md"
           placeholder={label}
         />
       </div>
