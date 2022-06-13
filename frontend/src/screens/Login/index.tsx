@@ -41,10 +41,10 @@ const LoginScreen = () => {
           token: uuidv4(),
         }
         setUser(response.data)
-        router.push('/dashboard')
         setCookie(null, 'auth', JSON.stringify(dataStore), {
           maxAge: 60,
         })
+        router.push('/dashboard')
       } else if (hasEmail) {
         await httpClient.get(`/login?email=${data.email}`)
         const dataStore = {

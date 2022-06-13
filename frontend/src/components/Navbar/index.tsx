@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="z-50 fixed bg-white min-w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 border-b-2 border-indigo-600">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
-        <Link passHref href="/">
+        <Link passHref href={user ? '/dashboard' : '/'}>
           <div className="flex items-center cursor-pointer">
             <Image
               height={50}
