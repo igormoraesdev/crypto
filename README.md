@@ -6,6 +6,8 @@
 - Zustand
 - TailwindCss
 - React-Hook-Form
+- Testing Library
+- Jest
 
 ## Description
 
