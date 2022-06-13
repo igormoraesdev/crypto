@@ -27,14 +27,16 @@ const LoginScreen = () => {
     try {
       const usersList = localStorage.getItem('usersList')
       const formatedList = JSON.parse(usersList as string)
-      const hasEmail = formatedList.find(
+      const hasEmail = formatedList?.find(
         (item: User) => item.email === data.email
       )
-      if (data.email.includes('admin@example.com')) {
+      if (data.email === 'admin@example.com') {
         const response = await httpClient.get(`/login?email=${data.email}`)
+
         const dataStore = {
           user: {
             ...response.data,
+            id: uuidv4(),
           },
           token: uuidv4(),
         }
@@ -48,6 +50,7 @@ const LoginScreen = () => {
         const dataStore = {
           user: {
             ...hasEmail,
+            id: uuidv4(),
           },
           token: uuidv4(),
         }
@@ -68,7 +71,7 @@ const LoginScreen = () => {
     <div className="h-screen bg-white">
       <div className="w-full h-full container mx-auto flex flex-col justify-start items-center">
         <div className="w-full min-h-full flex py-48 justify-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8">
+          <div className="max-w-md w-80 space-y-8">
             <div>
               <Typography
                 as="h2"
@@ -123,6 +126,7 @@ const LoginScreen = () => {
                     placeholder="Password"
                     id="password"
                     name={field.name}
+                    value={field.value}
                     type="password"
                     autocomplete="current-password"
                   />

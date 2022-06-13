@@ -32,6 +32,7 @@ const RegisterScreen = () => {
           ...payload,
           role: 'user',
           spread: 1,
+          id: uuidv4(),
         },
         token: uuidv4(),
       }
@@ -46,7 +47,7 @@ const RegisterScreen = () => {
         maxAge: 10,
       })
     } catch (error) {
-      console.log(error)
+      alert('Error, please check if server running')
     }
   }
 
